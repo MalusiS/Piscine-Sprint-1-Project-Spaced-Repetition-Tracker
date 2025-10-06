@@ -1,0 +1,21 @@
+{
+  "name": "piscine-sprint-1-project-spaced-repetition-tracker",
+  "version": "1.0.0",
+  "description": "At Code Your Future, we like to use a learning technique called spaced repetition...",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MalusiS/Piscine-Sprint-1-Project-Spaced-Repetition-Tracker.git"
+  },
+  "keywords": [],
+  "author": "Malusi Skunyana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MalusiS/Piscine-Sprint-1-Project-Spaced-Repetition-Tracker/issues"
+  },
+  "homepage": "https://github.com/MalusiS/Piscine-Sprint-1-Project-Spaced-Repetition-Tracker#readme"
+}
+
