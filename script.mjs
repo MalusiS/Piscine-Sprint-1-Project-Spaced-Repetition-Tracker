@@ -13,7 +13,7 @@ import { getUserIds, getData, getFutureAgendas } from "./common.mjs";
 
 window.onload = function () {
   const dropdown = document.getElementById("userDropdown")
-  const msg = document.getElementById("noAgendasMsg");
+  const msg = document.getElementById("noAgendaMsg");
 
   //loading the IDs into the dropdown
   const users = getUserIds();
@@ -33,7 +33,7 @@ window.onload = function () {
   console.log("Agenda:", agenda);
 
   //handling the no agenda message
-  if (agenda.length === 0) {
+  if (!agenda || agenda.length === 0) {
     msg.style.display = "block";
     return;// if thesres no agenda the function should stop
   } else {
@@ -45,21 +45,21 @@ window.onload = function () {
   console.log("Future Agendas:", futureAgendas);
   
   //display in the table
-  display
+  display(futureAgendas)
   });
 };
 
 //function to display agendas in the table
 function display(futureAgendas) {
-  const table = document.getElementById("agendaTable")
+  const table = document.getElementById("agendaTableBody")
   table.innerHTML = ""; //ALLOW TO clear old data.
 
   //this our for lopp that goes through every agenda creates a atbale row with 2 cells date and task and appends it to the table through appendChild method
   futureAgendas.forEach(item => {
     const row = document.createElement("tr");
      row.innerHTML = `
-      <td>${item.date}</td>
       <td>${item.task}</td>
+      <td>${item.date}</td>
     `; 
     table.appendChild(row);
   });

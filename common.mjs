@@ -5,9 +5,13 @@
 
   
   export function getData(userId) {
-  const agendaData = {
-    //users data
-  }
+    //sample data
+    const agendaData = { user1: [ { task: "Review JS basics", date: "2025-10-10" }, 
+      { task: "DOM practice", date: "2025-10-08" } ], 
+      user2: [] };
+
+
+  
   
 
   return agendaData[userId] || [];
