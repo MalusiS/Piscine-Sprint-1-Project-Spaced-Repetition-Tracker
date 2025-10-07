@@ -2,13 +2,13 @@
   return ["1", "2", "3", "4", "5"];
 }*/
  // commented out and focused on the logic of project, will look at the instructions in the rubric in the morning and talk about it during a huddle. 
-
+//theres something i do not get here. 
 
 const dropdown = document.getElementById("userDropdown");
 
 dropdown.addEventListener("change", function() {
   const selectedUserId = dropdown.value; 
-  console.log("Selected user ID:", selectedUserId);//this is where the user is selected.
+  console.log("Selected user ID:", selectedUserId);//adding a event listener to the drop down wich means this function will run everytime a user selects a new option.
 
 //load agenda for this user
 const agenda = getData(selectedUserId);
