@@ -7,20 +7,15 @@
 
     <!-- Scripts -->
     <script type="module" src="script.mjs"></script>
-    <script src="common.mjs"></script> <!-- Do I have to do this?? -->
+    
 </head>
 <body>
     <h2>Space Repetition Tracker</h2>
 
     <!-- Dropdown Menu -->
     <label for="userDropdown">Select user:</label>
-    <select id="userDropdown"> 
-        <option value="">Choose User</option>
-        <option value="user1">user1</option>
-        <option value="user2">user2</option>
-        <option value="user3">user3</option>
-        <option value="user4">user4</option>
-        <option value="user5">user5</option>
+    <select id="userDropdown">
+        <option value="">--Choose a  user--</option>
     </select>
 
     <!-- No Agenda Message -->
@@ -32,9 +27,10 @@
             <th>Agenda</th>
             <th>Date</th>
         </tr>
-        <tbody id="agendaTableBody">
+
+        <tbody id="agendaTableBody"></tbody>
             <!-- The tbody element represents a block of rows that consist of a body of data for the parent table element -->
-        </tbody>
+        
     </table>
 </body>
 </html>
