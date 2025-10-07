@@ -1,8 +1,36 @@
-<!DOCTYPE html>
-<html>
-  <head>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Piscine Project</title>
+
+    <!-- Scripts -->
     <script type="module" src="script.mjs"></script>
-  </head>
-  <body>
-  </body>
+    
+</head>
+<body>
+    <h2>Space Repetition Tracker</h2>
+
+    <!-- Dropdown Menu -->
+    <label for="userDropdown">Select user:</label>
+    <select id="userDropdown">
+        <option value="">--Choose a  user--</option>
+    </select>
+
+    <!-- No Agenda Message -->
+    <p id="noAgendaMsg" style="display:none;">No agenda</p>
+
+    <!-- Table -->
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>  <!-- Table row-->
+            <th>Agenda</th>
+            <th>Date</th>
+        </tr>
+
+        <tbody id="agendaTableBody"></tbody>
+            <!-- The tbody element represents a block of rows that consist of a body of data for the parent table element -->
+        
+    </table>
+</body>
 </html>
