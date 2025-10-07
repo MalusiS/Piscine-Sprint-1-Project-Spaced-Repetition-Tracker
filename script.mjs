@@ -54,6 +54,7 @@ function display(futureAgendas) {
   const table = document.getElementById("agendaTable")
   table.innerHTML = ""; //ALLOW TO clear old data.
 
+  //this our for lopp that goes through every agenda creates a atbale row with 2 cells date and task and appends it to the table through appendChild method
   futureAgendas.forEach(item => {
     const row = document.createElement("tr");
      row.innerHTML = `
