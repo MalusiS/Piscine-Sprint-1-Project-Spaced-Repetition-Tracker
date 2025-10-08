@@ -1,21 +1,14 @@
-// This is a placeholder file which shows how you can access functions defined in other files.
-// It can be loaded into index.html.
-// You can delete the contents of the file once you have understood how it works.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
-
-import { getUserIds, getData, getFutureAgendas } from "./common.mjs";
-
-//window.onload = function () {
- // const users = getUserIds();
- // document.querySelector("body").innerText = `There are ${users.length} users`;
-//};
+import { getUserIds, getData, getFutureAgendas, addAgenda } from "./common.mjs";
 
 window.onload = function () {
-  const dropdown = document.getElementById("userDropdown")
+  const dropdown = document.getElementById("userDropdown");
   const msg = document.getElementById("noAgendaMsg");
+  const form = document.getElementById("agendaForm");
+  const taskInput = document.getElementById("taskInput");
+  const dateInput = document.getElementById("dateInput");
+  const formErrorMsg = document.getElementById("formErrorMsg");
 
-  //loading the IDs into the dropdown
+  // Load users into dropdown
   const users = getUserIds();
   users.forEach(userId => {
     const option = document.createElement("option");
@@ -23,44 +16,75 @@ window.onload = function () {
     option.text = userId;
     dropdown.appendChild(option);
   });
-//event listener for when the user selects an option
-  dropdown.addEventListener("change", function() {
-  const selectedUserId = dropdown.value; 
-  console.log("Selected user ID:", selectedUserId);
 
-//get agenda for selected user
-  const agenda = getData(selectedUserId);
-  console.log("Agenda:", agenda);
+  // Event listener for dropdown change
+  dropdown.addEventListener("change", function () {
+    const selectedUserId = dropdown.value;
+    displayAgendas(selectedUserId);
+  });
 
-  //handling the no agenda message
-  if (!agenda || agenda.length === 0) {
-    msg.style.display = "block";
-    return;// if thesres no agenda the function should stop
-  } else {
-    msg.style.display = "none";
+  // Event listener for form submission
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const selectedUserId = dropdown.value.trim();
+    const task = taskInput.value.trim();
+    const date = dateInput.value;
+
+    // Validation
+    if (!selectedUserId) {
+      showError("Please select a user before adding an agenda.");
+      return;
+    }
+    if (!task || !date) {
+      showError("Please fill in both the task and date.");
+      return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const selectedDate = new Date(date);
+
+    if (selectedDate < today) {
+      showError("The date must not be in the past.");
+      return;
+    }
+
+    // Add the new agenda
+    addAgenda(selectedUserId, task, date);
+
+    // Clear form and error
+    form.reset();
+    formErrorMsg.style.display = "none";
+
+    // Refresh the table
+    displayAgendas(selectedUserId);
+  });
+
+  // Helper: show validation errors
+  function showError(message) {
+    formErrorMsg.innerText = message;
+    formErrorMsg.style.display = "block";
   }
 
-  //filtering and sorting future agendas
-  const futureAgendas = getFutureAgendas(agenda);
-  console.log("Future Agendas:", futureAgendas);
-  
-  //display in the table
-  display(futureAgendas)
-  });
+  // Helper: display agendas for a user
+  function displayAgendas(userId) {
+    const tableBody = document.getElementById("agendaTableBody");
+    const agenda = getData(userId);
+    const futureAgendas = getFutureAgendas(agenda);
+
+    tableBody.innerHTML = "";
+
+    if (!futureAgendas.length) {
+      msg.style.display = "block";
+      return;
+    } else {
+      msg.style.display = "none";
+    }
+
+    futureAgendas.forEach(item => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${item.task}</td><td>${item.date}</td>`;
+      tableBody.appendChild(row);
+    });
+  }
 };
-
-//function to display agendas in the table
-function display(futureAgendas) {
-  const table = document.getElementById("agendaTableBody")
-  table.innerHTML = ""; //ALLOW TO clear old data.
-
-  //this our for lopp that goes through every agenda creates a atbale row with 2 cells date and task and appends it to the table through appendChild method
-  futureAgendas.forEach(item => {
-    const row = document.createElement("tr");
-     row.innerHTML = `
-      <td>${item.task}</td>
-      <td>${item.date}</td>
-    `; 
-    table.appendChild(row);
-  });
-  }
