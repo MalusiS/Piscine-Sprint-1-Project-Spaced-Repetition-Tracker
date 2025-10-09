@@ -21,7 +21,7 @@
        <section aria-labelledby="user-selection">
          <h2 id="user-selection">Select user</h2>
          <select id="userDropdown"> 
-          <option value="userDropdown">--Choose a user--</option> 
+          <option value="">--Choose a user--</option> 
           </select>
        </section>
 
@@ -30,9 +30,8 @@
         <!-- Add Agenda Form --> 
          <section aria-labelledby="add-agenda">
             <h2 id="add-agenda">Add New Agenda</h2>
-         </section>
-       
-        <form id="agendaForm"> 
+
+            <form id="agendaForm"> 
             <label for="taskInput">Task:</label> 
             <input type="text" id="taskInput" required /> 
 
@@ -41,6 +40,9 @@
 
             <button type="submit">Add Agenda</button> 
         </form>
+
+         </section>
+       
 
           <!-- remove inline css in the Form error message-->
         <p id="formErrorMsg"></p> 
@@ -51,6 +53,7 @@
         <!-- Table --> 
         <section>
             <table border="1" cellpadding="8" cellspacing="0"> 
+                <caption>User Agenda List</caption>
                 <tr> 
                  <th>Agenda</th> 
                  <th>Date</th> 
