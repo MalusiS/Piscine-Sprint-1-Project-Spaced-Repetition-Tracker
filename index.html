@@ -1,45 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head> 
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>The Piscine Project</title> 
-        <script type="module" src="script.mjs"></script> 
-    </head>
+  <head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>The Piscine Project</title> 
+    <script type="module" src="script.mjs"></script> 
+  </head>
 
     <body>
-        <h2>Space Repetition Tracker</h2>
+    <!-- Page Header --> 
+    <header>
+      <h1>Space Repetition Tracker</h1>
+    </header>
 
-        <!-- Dropdown Menu --> 
-        <label for="userDropdown">Select user:</label> 
-        <select id="userDropdown"> 
-            <option value="">--Choose a user--</option> 
-        </select>
+      <!-- Main content --> 
+    <main role="main">
+
+      <!-- user Selection --> 
+       <section aria-labelledby="user-selection">
+         <h2 id="user-selection">Select user</h2>
+         <select id="userDropdown"> 
+          <option value="">--Choose a user--</option> 
+          </select>
+       </section>
+
+      
 
         <!-- Add Agenda Form --> 
-        <h3>Add New Agenda</h3> 
-        <form id="agendaForm"> 
+         <section aria-labelledby="add-agenda">
+            <h2 id="add-agenda">Add New Agenda</h2>
+
+            <form id="agendaForm"> 
             <label for="taskInput">Task:</label> 
             <input type="text" id="taskInput" required /> 
+
             <label for="dateInput">Date:</label> 
             <input type="date" id="dateInput" required /> 
+
             <button type="submit">Add Agenda</button> 
         </form>
 
-        <p id="formErrorMsg" style="color:red; display:none;"></p>
+         </section>
+       
+
+          <!-- remove inline css in the Form error message-->
+        <p id="formErrorMsg"></p> 
 
         <!-- No Agenda Message --> 
-        <p id="noAgendaMsg" style="display:none;">No agenda</p>
+        <p id="noAgendaMsg">No agenda</p>
 
         <!-- Table --> 
-        <table border="1" cellpadding="8" cellspacing="0"> 
-            <tr> 
-                <th>Agenda</th> 
-                <th>Date</th> 
-            </tr> 
-            <tbody id="agendaTableBody"></tbody> 
-        </table>
-    </body>
+        <section>
+            <table border="1" cellpadding="8" cellspacing="0"> 
+                <caption>User Agenda List</caption>
+                <tr> 
+                 <th>Agenda</th> 
+                 <th>Date</th> 
+                </tr> 
+               <tbody id="agendaTableBody">
 
+               </tbody> 
+            </table>       
+
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Piscine Project</p>
+    </footer>
+    </body>
 </html>

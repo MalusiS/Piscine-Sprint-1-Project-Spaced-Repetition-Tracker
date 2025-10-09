@@ -1,5 +1,5 @@
 import { getUserIds, getData, getFutureAgendas, addAgenda } from "./common.mjs";
-
+//tels the browser to run the code when the page is fully loaded
 window.onload = function () {
   const dropdown = document.getElementById("userDropdown");
   const msg = document.getElementById("noAgendaMsg");
