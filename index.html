@@ -21,6 +21,7 @@
       <!-- user Selection --> 
       <section aria-labelledby="user-selection">
         <h2 id="user-selection">Select user</h2>
+        <label for="userDropdown">User:</label>
         <select id="userDropdown"> 
           <option value="">--Choose a user--</option> 
         </select>
@@ -47,10 +48,12 @@
       <section>
         <table border="1" cellpadding="8" cellspacing="0"> 
           <caption>User Agenda List</caption>
-          <tr> 
-            <th>Agenda</th> 
-            <th>Date</th> 
-          </tr> 
+          <thead>
+            <tr>
+              <th scope="col">Agenda</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
           <tbody id="agendaTableBody"></tbody> 
         </table>       
       </section>
