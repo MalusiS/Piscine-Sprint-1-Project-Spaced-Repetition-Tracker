@@ -1,12 +1,19 @@
+// Handles user interactions, form validation, and agenda display logic for the Spaced Repetition Tracker.
+
 import { getUserIds, getData, getFutureAgendas, addAgenda } from "./common.mjs";
-//tels the browser to run the code when the page is fully loaded
+
+// Tells the browser to run the code when the page is fully loaded
 window.onload = function () {
   const dropdown = document.getElementById("userDropdown");
   const msg = document.getElementById("noAgendaMsg");
   const form = document.getElementById("agendaForm");
-  const taskInput = document.getElementById("taskInput");
+  const topicInput = document.getElementById("topicInput");
   const dateInput = document.getElementById("dateInput");
   const formErrorMsg = document.getElementById("formErrorMsg");
+
+  // Set default date to today
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.value = today;
 
   // Load users into dropdown
   const users = getUserIds();
@@ -27,7 +34,7 @@ window.onload = function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     const selectedUserId = dropdown.value.trim();
-    const task = taskInput.value.trim();
+    const topic = topicInput.value.trim();
     const date = dateInput.value;
 
     // Validation
@@ -35,26 +42,18 @@ window.onload = function () {
       showError("Please select a user before adding an agenda.");
       return;
     }
-    if (!task || !date) {
-      showError("Please fill in both the task and date.");
-      return;
-    }
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const selectedDate = new Date(date);
-
-    if (selectedDate < today) {
-      showError("The date must not be in the past.");
+    if (!topic || !date) {
+      showError("Please fill in both the topic and date.");
       return;
     }
 
     // Add the new agenda
-    addAgenda(selectedUserId, task, date);
+    addAgenda(selectedUserId, topic, date);
 
     // Clear form and error
     form.reset();
-    formErrorMsg.style.display = "none";
+    dateInput.value = today; // Reset to today after submit
+    formErrorMsg.hidden = true;
 
     // Refresh the table
     displayAgendas(selectedUserId);
@@ -63,7 +62,7 @@ window.onload = function () {
   // Helper: show validation errors
   function showError(message) {
     formErrorMsg.innerText = message;
-    formErrorMsg.style.display = "block";
+    formErrorMsg.hidden = false;
   }
 
   // Helper: display agendas for a user
@@ -75,15 +74,15 @@ window.onload = function () {
     tableBody.innerHTML = "";
 
     if (!futureAgendas.length) {
-      msg.style.display = "block";
+      msg.hidden = false;
       return;
     } else {
-      msg.style.display = "none";
+      msg.hidden = true;
     }
 
     futureAgendas.forEach(item => {
       const row = document.createElement("tr");
-      row.innerHTML = `<td>${item.task}</td><td>${item.date}</td>`;
+      row.innerHTML = `<td>${item.topic}</td><td>${item.date}</td>`;
       tableBody.appendChild(row);
     });
   }
